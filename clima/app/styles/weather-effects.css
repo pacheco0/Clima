@@ -1,0 +1,247 @@
+/* Efectos de clima */
+.weather-container {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    transition: background 1s ease-in-out;
+}
+
+/* Efecto de lluvia mejorado */
+.rain {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: -100%;
+}
+
+.rain::before,
+.rain::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        repeating-linear-gradient(transparent, transparent 5px, #FFF 5px, #FFF 7px),
+        repeating-linear-gradient(transparent, transparent 7px, #FFF 7px, #FFF 9px),
+        repeating-linear-gradient(transparent, transparent 11px, #FFF 11px, #FFF 13px);
+    background-size: 
+        100px 100%,
+        120px 100%,
+        140px 100%;
+    transform: rotate(15deg);
+    opacity: 0.05;
+    animation: rain-fall 0.8s linear infinite;
+}
+
+.rain::after {
+    opacity: 0.08;
+    animation: rain-fall 1.2s linear infinite;
+    transform: rotate(25deg);
+    background-size: 
+        130px 100%,
+        110px 100%,
+        160px 100%;
+}
+
+@keyframes rain-fall {
+    0% {
+        transform: translateY(-100%) rotate(15deg);
+    }
+    100% {
+        transform: translateY(100%) rotate(15deg);
+    }
+}
+
+/* Efecto de rayos mejorado */
+.thunder {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.thunder::before,
+.thunder::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    animation: thunder-flash 8s linear infinite;
+}
+
+.thunder::after {
+    animation-delay: 4s;
+}
+
+.lightning {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.lightning::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 60%;
+    top: 20%;
+    left: 50%;
+    background: white;
+    opacity: 0;
+    filter: blur(1px);
+    box-shadow: 
+        0 0 15px 3px rgba(255,255,255,0.9),
+        0 0 25px 5px rgba(255,255,255,0.5),
+        5px 0 35px 7px rgba(255,255,255,0.3);
+    animation: lightning-strike 8s linear infinite;
+    transform: rotate(45deg);
+}
+
+.lightning::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 40%;
+    top: 40%;
+    left: 60%;
+    background: white;
+    opacity: 0;
+    filter: blur(1px);
+    box-shadow: 
+        0 0 15px 3px rgba(255,255,255,0.9),
+        0 0 25px 5px rgba(255,255,255,0.5),
+        5px 0 35px 7px rgba(255,255,255,0.3);
+    animation: lightning-strike 8s linear infinite;
+    animation-delay: 4s;
+    transform: rotate(-35deg);
+}
+
+@keyframes thunder-flash {
+    0%, 100% {
+        background: transparent;
+    }
+    0.5% {
+        background: rgba(255,255,255,0.2);
+    }
+    0.7% {
+        background: transparent;
+    }
+    0.8% {
+        background: rgba(255,255,255,0.3);
+    }
+    1% {
+        background: transparent;
+    }
+    1.5% {
+        background: rgba(255,255,255,0.2);
+    }
+    1.7% {
+        background: transparent;
+    }
+}
+
+@keyframes lightning-strike {
+    0%, 100% {
+        opacity: 0;
+    }
+    0.5% {
+        opacity: 1;
+        transform: scaleY(1) rotate(45deg);
+    }
+    0.7% {
+        opacity: 0.2;
+    }
+    0.8% {
+        opacity: 1;
+        transform: scaleY(1.2) rotate(45deg);
+    }
+    1% {
+        opacity: 0;
+    }
+}
+
+/* Efecto de nieve */
+.snow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, white 1%, transparent 1%);
+    background-size: 15px 15px;
+    animation: snow 5s linear infinite;
+}
+
+@keyframes snow {
+    0% {
+        background-position: 0px 0px;
+    }
+    100% {
+        background-position: 50px 500px;
+    }
+}
+
+/* Efecto de nubes */
+.clouds {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 24'%3E%3Cpath fill='%23fff' fill-opacity='0.1' d='M44,12 C44,6.5 39.5,2 34,2 C29.5,2 25.7,5.4 24.3,9.9 C23.6,9.3 22.7,9 21.7,9 C19.5,9 17.7,10.8 17.7,13 C17.7,13.2 17.7,13.4 17.8,13.6 C16.7,13.2 15.5,13 14.3,13 C9.9,13 6.4,16.5 6.4,20.9 C6.4,21.6 6.5,22.3 6.7,23 L49.3,23 C49.5,22.3 49.6,21.6 49.6,20.9 C49.6,16.5 46.1,13 41.7,13 C40.5,13 39.3,13.2 38.2,13.6 C38.3,13.4 38.3,13.2 38.3,13 C38.3,10.8 36.5,9 34.3,9 C33.3,9 32.4,9.3 31.7,9.9 C30.3,5.4 26.5,2 22,2 C16.5,2 12,6.5 12,12'/%3E%3C/svg%3E") repeat-x;
+    background-size: 200px 100px;
+    animation: clouds 20s linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes clouds {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 200px 0;
+    }
+}
+
+/* Efecto de sol */
+.sun {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle at 50% 50%, #FFD700, transparent 70%);
+    animation: sun-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes sun-glow {
+    from {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    to {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+/* Fondos según el clima */
+.clear-sky {
+    background: linear-gradient(to bottom, #4A90E2, #87CEEB);
+}
+
+.clouds-bg {
+    background: linear-gradient(to bottom, #738796, #A8C0D3);
+}
+
+.rain-bg {
+    background: linear-gradient(to bottom, #4A5D6E, #738796);
+}
+
+.snow-bg {
+    background: linear-gradient(to bottom, #E3E3E3, #FFFFFF);
+}
+
+.thunder-bg {
+    background: linear-gradient(to bottom, #2C3E50, #34495E);
+}
+
+.mist-bg {
+    background: linear-gradient(to bottom, #B8C6DB, #F5F7FA);
+} 
